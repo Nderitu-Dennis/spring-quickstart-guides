@@ -15,3 +15,5 @@ NOT how it’s done (implementation)
 1. final → cannot be extended further
 2. sealed → continues restricting
 3. non-sealed → opens it up again
+
+- Find more on this [documentation](https://docs.oracle.com/en/java/javase/21/language/sealed-classes-and-interfaces.html)

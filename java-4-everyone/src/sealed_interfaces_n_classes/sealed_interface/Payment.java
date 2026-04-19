@@ -4,4 +4,5 @@ public sealed interface Payment permits CardPayment, MpesaPayment {
 
     double process(double amount);
     String getPaymentType();
+
 }
