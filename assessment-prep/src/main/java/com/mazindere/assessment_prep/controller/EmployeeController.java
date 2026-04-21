@@ -4,13 +4,12 @@ import com.mazindere.assessment_prep.entity.Employees;
 import com.mazindere.assessment_prep.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+//@RequestMapping("/employee")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -18,12 +17,30 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService){
         this.employeeService=employeeService;
     }
-    @GetMapping("/{employeeId}")
+
+    @GetMapping("/employee/{employeeId}")
     public ResponseEntity<Employees> getEmployee (@PathVariable Integer employeeId){
         return ResponseEntity.ok(employeeService.getEmployee(employeeId));
 
     }
 
     //ResponseEntity-full HTTP response (status code, headers, body)
+
+@GetMapping("/employees")
+    public ResponseEntity<List<Employees>> getAllEmployees(){
+        return ResponseEntity.ok(employeeService.getAllEmployees());
+}
+
+@PostMapping("/saveEmployee")
+    public ResponseEntity<Employees> saveEmployee (@RequestBody Employees employee){
+        //todo - check request body n more of POST ops
+        return ResponseEntity.status(201).body(employeeService.saveEmployee(employee));
+}
+
+@DeleteMapping("/employee/{employeeId}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Integer employeeId){
+        employeeService.deleteByEmployeeId(employeeId);
+        return ResponseEntity.noContent().build();
+}
 
 }
