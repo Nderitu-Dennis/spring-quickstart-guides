@@ -20,7 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employees getEmployee(Integer employeeId) {
-        return employeeRepository.findEmployeeByEmployeeId(employeeId)
+        return employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Employee with id " + employeeId + " not found"));
@@ -29,15 +29,15 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public List<Employees> getAllEmployees() {
-//        print w an enhanced for loop?
+//todo       print w an enhanced for loop?
         return employeeRepository.findAll();
     }
 
     @Override
     @Transactional
-    public void deleteByEmployeeId(Integer employeeId) {
+    public void deleteById(Integer employeeId) {
         if(!employeeRepository.existsById(employeeId)){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, //todo- diff btwn throw & or else throw
                     "Employee with id " + employeeId + " not found");
         }
         employeeRepository.deleteById(employeeId);

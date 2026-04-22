@@ -2,7 +2,6 @@ package com.mazindere.assessment_prep.controller;
 
 import com.mazindere.assessment_prep.entity.Employees;
 import com.mazindere.assessment_prep.service.EmployeeService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +38,7 @@ public class EmployeeController {
 
 @DeleteMapping("/employee/{employeeId}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Integer employeeId){
-        employeeService.deleteByEmployeeId(employeeId);
+        employeeService.deleteById(employeeId);
         return ResponseEntity.noContent().build();
 }
 
