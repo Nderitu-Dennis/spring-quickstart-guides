@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -17,7 +17,7 @@ public class EmployeeController {
         this.employeeService=employeeService;
     }
 
-    @GetMapping("/employee/{employeeId}")
+    @GetMapping("/{employeeId}")
     public ResponseEntity<Employees> getEmployee (@PathVariable Integer employeeId){
         return ResponseEntity.ok(employeeService.getEmployee(employeeId));
 
@@ -25,18 +25,18 @@ public class EmployeeController {
 
     //ResponseEntity-full HTTP response (status code, headers, body)
 
-@GetMapping("/employees")
+@GetMapping()
     public ResponseEntity<List<Employees>> getAllEmployees(){
         return ResponseEntity.ok(employeeService.getAllEmployees());
 }
 
-@PostMapping("/saveEmployee")
+@PostMapping()
     public ResponseEntity<Employees> saveEmployee (@RequestBody Employees employee){
         //todo - check request body n more of POST ops
         return ResponseEntity.status(201).body(employeeService.saveEmployee(employee));
 }
 
-@DeleteMapping("/employee/{employeeId}")
+@DeleteMapping("/{employeeId}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Integer employeeId){
         employeeService.deleteById(employeeId);
         return ResponseEntity.noContent().build();
