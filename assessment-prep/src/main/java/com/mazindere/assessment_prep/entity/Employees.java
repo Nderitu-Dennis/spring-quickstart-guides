@@ -3,6 +3,8 @@ package com.mazindere.assessment_prep.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name="employees")
 @Data
@@ -20,4 +22,10 @@ public class Employees {
     private String lastName;
 
     private double salary;
+
+    @Column(name="created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
+    // can trim to remove millisecs & match mysql hh:mm:s createdAt = LocalDateTime.now().withNano(0);
+
+
 }
